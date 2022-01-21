@@ -4,7 +4,8 @@ if [ $(id -u) -eq 0 ]
 then
   : root
 else
-  : not root
+  : echo "not root, please run with sudo"
+  exit 1
 fi
 
 # Add unprivileged user

@@ -1,10 +1,19 @@
-#!/bin/sh
+#!/bin/bash
+
+## Define error code
+E_NOTROOT=87 # Non-root exit error.
+
+## check if is sudoer
+if ! $(sudo -l &> /dev/null); then
+    echo 'Error: root privileges are needed to run this script'
+    exit $E_NOTROOT
+fi
 
 # Add unprivileged user
 useradd node_exporter -s /sbin/nologin
 
 # Get node exporter binary and copy it into place
-if [ -f "wget" ]; then
+if [[ -f "wget" ]]; then
     echo "Checking for wget... found"
     wget https://github.com/prometheus/node_exporter/releases/download/v1.3.1/node_exporter-1.3.1.linux-amd64.tar.gz
     tar xvfz node_exporter-*.*-amd64.tar.gz
@@ -39,3 +48,5 @@ systemctl start node_exporter
 
 # Verify metrics are being pulled
 curl http://localhost:9100/metrics
+
+exit 0

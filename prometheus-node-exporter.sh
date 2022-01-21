@@ -45,6 +45,12 @@ systemctl enable node_exporter
 systemctl start node_exporter
 
 # Verify metrics are being pulled
-if [ -f curl http://localhost:9100/metrics
+
+if [ ! -x /usr/bin/curl ] ; then
+    # some extra check if curl is not installed at the usual place
+    command -v curl >/dev/null 2>&1 || { echo >&2 "Please install curl to verify metrics. Skipping  metrics check."; exit 1; }
+else 
+    curl http://localhost:9100/metrics
+fi
 
 exit 0

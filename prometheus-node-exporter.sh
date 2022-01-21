@@ -1,12 +1,10 @@
-#!/bin/bash
+#!/bin/sh
 
-## Define error code
-E_NOTROOT=87 # Non-root exit error.
-
-## check if is sudoer
-if ! $(sudo -l &> /dev/null); then
-    echo 'Error: root privileges are needed to run this script'
-    exit $E_NOTROOT
+if [ $(id -u) -eq 0 ]
+then
+  : root
+else
+  : not root
 fi
 
 # Add unprivileged user

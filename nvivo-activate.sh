@@ -33,7 +33,7 @@ cat > /tmp/license_data.xml << EOF
 EOF
 
 if [[ "$version" == 12 ]]; then
-    nvivo="/Applications/NVivo.app/Contents/MacOS/NVivo 12"
+    nvivo="/Applications/NVivo 12.app/Contents/MacOS/NVivo 12"
 elif [[ "$version" == 20 ]]; then
     nvivo="/Applications/NVivo.app/Contents/MacOS/NVivo"
 else

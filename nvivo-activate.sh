@@ -1,11 +1,16 @@
 #!/bin/bash
-
-# deactivate existing license and activate with new license
-# Joe Schlimmer Ithaca College 1-2-2020
+#
+# Deactivate existing license and activate with new license
+# For Use in a Jamf Pro script policy.
+# Make sure to set the 4 and 5 parameters.
+#
+# license="YOURNVNVIOLICENSECODE"
+# version="12" or version="20"
+#
+# Joe Schlimmer - 1-2-2020
 # 8-28-2020: Added more verbose script feedback lines
 # 2022-01-26: Revise to support both nvivo 12 and 20 activation
-# Use in Jamf Pro policy, make sure to set the 4 and 5 parameters
-# Version value can be 12 or 20
+#
 
 license="$4"
 version="$5"
@@ -14,9 +19,9 @@ cat > /tmp/license_data.xml << EOF
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <Activation>
   <Request>
-    <FirstName>Ithaca</FirstName>
-    <LastName>College</LastName>
-    <Email>itslabdeployment@ithaca.edu</Email>
+    <FirstName>FIRST NAME</FirstName>
+    <LastName>LAST NAME</LastName>
+    <Email>EMAIL@DOMAIN</Email>
     <Phone></Phone>
     <Fax></Fax>
     <JobTitle></JobTitle>
@@ -25,9 +30,9 @@ cat > /tmp/license_data.xml << EOF
     <Role></Role>
     <Department></Department>
     <Organization></Organization>
-    <City>Ithaca</City>
-    <Country>USA</Country>
-    <State>New York</State>
+    <City>CITY</City>
+    <Country>NATION</Country>
+    <State>STATE</State>
   </Request>
 </Activation>
 EOF
@@ -40,7 +45,6 @@ else
     echo "Version not specified or unknown"
     exit 1
 fi
-
 
 echo "Removing any existing Nvivo licenses"
 "$nvivo" -deactivate

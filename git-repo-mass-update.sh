@@ -9,7 +9,9 @@ if [[ ! -z "$path" ]]; then
         if [[ -d "$item" ]]; then
             cd $item
             pwd
-            git pull
+            if [[ -d .git ]]; then
+                git pull
+            fi
             cd ..
         else
             continue

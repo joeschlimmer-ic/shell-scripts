@@ -5,7 +5,7 @@ Wants=zfs.target
 
 [Service]
 Type=oneshot
-ExecStart=/usr/bin/env python3 zpool-status.py
+ExecStart=/usr/bin/env python3 /usr/local/bin/zpool-status.py
 TimeoutSec=60
 
 [Install]

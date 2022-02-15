@@ -1,0 +1,13 @@
+[Unit]
+Description=Python script to send zpool status to slack webhook
+Documentation=https://gitea.schlimmers.space/joe/python-scripts/src/branch/main/webhooks/slack_webhook.py
+Wants=zfs.target
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/env python3 zpool-status.py
+TimeoutSec=60
+
+[Install]
+WantedBy=multi-user.target
+Alias=zpool-status.service

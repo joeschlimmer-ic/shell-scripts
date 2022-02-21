@@ -10,7 +10,7 @@ buttonClicked=$("/Library/Application Support/JAMF/bin/jamfHelper.app/Contents/M
 if [ $buttonClicked == 0 ]; then
 	# Buttion 1 was Clicked
 	echo "OK"
-        open "https://ithaca.edu"
+        open "https://bit.ly/IthacaCollegeSpring22"
 elif [ $buttonClicked == 2 ]; then
 	# Buttion 2 was Clicked
 	echo "Cancel"

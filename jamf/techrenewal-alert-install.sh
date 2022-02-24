@@ -97,7 +97,7 @@ EOF
 log "LaunchAgent and Script install complete"
 log "boostrapping the launchagent"
 
-	launchctl bootout gui/"$userID" /Library/LaunchAgents/edu.ithaca.techrenewal.plist
-	launchctl bootstrap gui/"$userID" /Library/LaunchAgents/edu.ithaca.techrenewal.plist
+launchctl bootout gui/"$userID" /Library/LaunchAgents/edu.ithaca.techrenewal.plist
+launchctl bootstrap gui/"$userID" /Library/LaunchAgents/edu.ithaca.techrenewal.plist
 
 exit $?

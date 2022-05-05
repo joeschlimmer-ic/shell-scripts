@@ -10,6 +10,7 @@ if [[ ! -z "$path" ]]; then
             cd $item
             pwd
             if [[ -d .git ]]; then
+                git status
                 git pull
             fi
             cd ..

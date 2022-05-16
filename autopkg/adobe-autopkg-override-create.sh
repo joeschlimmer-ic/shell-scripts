@@ -1,34 +1,40 @@
 #!/bin/sh
 
-# autopkg make-override "Adobe 2022 Import.jss.recipe" -n AdobeAcrobatDC2022-ARM64.jss
+# autopkg make-override "Adobe 2022 Import.jss.recipe" -n AdobeAPPNAME2022-$platform.jss
+
+platform="$1"
 
 OVERRIDES=(
-    "AdobeAcrobatDC2023-ARM64"
-    "AdobeAfterEffects2022-ARM64"
-    "AdobeAnimate2022-ARM64"
-    "AdobeAudition2022-Intel"
-    "AdobeBridge2022-ARM64"
-    "AdobeCharacterAnimator2022-ARM64"
-    "AdobeDimension2022-ARM64"
-    "AdobeDreamweaver2022-ARM64"
-    "AdobeIllustrator2022-ARM64"
-    "AdobeInCopy2022-ARM64"
-    "AdobeInDesign2022-ARM64"
-    "AdobeLightroom2022-ARM64"
-    "AdobeLightroomClassic2022-ARM64"
-    "AdobeMediaEncoder2022-ARM64"
-    "AdobePhotoshop2022-ARM64"
-    "AdobePremierePro2022-ARM64"
-    "AdobePremiereRush2022-ARM64"
-    "AdobeSubstance3DDesigner2022-ARM64"
-    "AdobeSubstance3DPainter2022-ARM64"
-    "AdobeSubstance3DSampler2022-ARM64"
-    "AdobeSubstance3DStager2022-ARM64"
-    "AdobeXD2022-ARM64"
+    "AdobeAcrobatDC2023-$platform"
+    "AdobeAfterEffects2022-$platform"
+    "AdobeAnimate2022-$platform"
+    "AdobeAudition2022-$platform"
+    "AdobeBridge2022-$platform"
+    "AdobeCharacterAnimator2022-$platform"
+    "AdobeDimension2022-$platform"
+    "AdobeDreamweaver2022-$platform"
+    "AdobeIllustrator2022-$platform"
+    "AdobeInCopy2022-$platform"
+    "AdobeInDesign2022-$platform"
+    "AdobeLightroom2022-$platform"
+    "AdobeLightroomClassic2022-$platform"
+    "AdobeMediaEncoder2022-$platform"
+    "AdobePhotoshop2022-$platform"
+    "AdobePremierePro2022-$platform"
+    "AdobePremiereRush2022-$platform"
+    "AdobeSubstance3DDesigner2022-$platform"
+    "AdobeSubstance3DPainter2022-$platform"
+    "AdobeSubstance3DSampler2022-$platform"
+    "AdobeSubstance3DStager2022-$platform"
+    "AdobeXD2022-$platform"
 )
 
-for app in "${OVERRIDES[@]}"; do
-    echo "Making override for $app.jss"
-    autopkg make-override "Adobe 2022 Import.jss.recipe" -n "$app.jss" --force
-    sed -i.backup "s/SomeAdobe2022Title/$app/g" "$HOME/Library/AutoPkg/RecipeOverrides/$app.jss.recipe"
-done
+if [[ ! -z "$platform" ]]; then
+	for app in "${OVERRIDES[@]}"; do
+	    echo "Making override for $app.jss"
+	    autopkg make-override "Adobe 2022 Import.jss.recipe" -n "$app.jss" --force
+	    sed -i.backup "s/SomeAdobe2022Title/$app/g" "$HOME/Library/AutoPkg/RecipeOverrides/$app.jss.recipe"
+	done
+else
+	echo "Must specify a platform ARM64 or Intel"
+fi

@@ -5,7 +5,7 @@
 platform="$1"
 
 OVERRIDES=(
-    "AdobeAcrobatDC2023-$platform"
+    "AdobeAcrobatDC2022-$platform"
     "AdobeAfterEffects2022-$platform"
     "AdobeAnimate2022-$platform"
     "AdobeAudition2022-$platform"

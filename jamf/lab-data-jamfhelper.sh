@@ -66,7 +66,7 @@ log "Install datadeletion.sh"
 
 IFS= read -r -d '' datadeletion <<"EOF"
 #!/bin/bash
-# Display a notification to the end user to schedule a tech renewal appointment
+# Display a notification to the end user on login that their data is not retained on this device and back up their data.
 # Joe Schlimmer
 
 loggedInUser=$( echo "show State:/Users/ConsoleUser" | scutil | awk '/Name :/ && ! /loginwindow/ { print $3 }' )
@@ -77,17 +77,11 @@ buttonClicked=$("/Library/Application Support/JAMF/bin/jamfHelper.app/Contents/M
     -windowType utility \
     -icon "/Library/Ithaca/IC-Logo2L.png" \
     -title "Ithaca College Information Technology" \
-    -heading "Personal Data warning" \
-    -description "Data on this computer is not backed up. This computer may be wiped or repurposed at any time without warning. Please make sure your data is backed up to a cloud service such as OneDrive, or a device like a thumb drive." \
-    -button1 "More info" \
+    -heading "Personal Data Warning" \
+    -description "This computer may be wiped of its user profiles and data, without warning. Please make sure your data is backed up to a cloud service such as OneDrive or a personal external hard drive." \
     -button2 "I understand")
 
-if [ "$buttonClicked" == 0 ]; then
-	# Buttion 1 was Clicked
-        echo "$(date)::: Opening data retention info page" >> /var/tmp/tech_renewal.log
-        echo "Ithaca College lab Mac Serialnumber: $computerSerial" >> /var/tmp/tech_renewal.log
-        open "https://ithaca.edu/it"
-elif [ "$buttonClicked" == 2 ]; then
+if [ "$buttonClicked" == 2 ]; then
 	# Buttion 2 was Clicked
         echo "$(date)::: I, $loggedInuser, understand that my data may be wiped at any time" >> /var/tmp/tech_renewal.log
 fi

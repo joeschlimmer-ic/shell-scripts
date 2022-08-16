@@ -8,7 +8,7 @@
 
 log() {
     /bin/echo "$1"
-    /usr/bin/logger -t "Tech Renewal launchagent and script installer:" "$1"
+    /usr/bin/logger -t "Data deletion jamfhelper warning launchagent and script installer:" "$1"
 }
 
 # Make sure the script is run as root
@@ -81,7 +81,7 @@ buttonClicked=$("/Library/Application Support/JAMF/bin/jamfHelper.app/Contents/M
     -description "This computer may be wiped of its user profiles and data, without warning. Please make sure your data is backed up to a cloud service such as OneDrive or a personal external hard drive." \
     -button2 "I understand")
 
-if [ "$buttonClicked" == 2 ]; then
+if [[ "$buttonClicked" == 2 ]]; then
 	# Buttion 2 was Clicked
         echo "$(date)::: I, $loggedInuser, understand that my data may be wiped at any time" >> /var/tmp/tech_renewal.log
 fi
@@ -93,10 +93,12 @@ EOF
 /bin/chmod 755 /Library/Ithaca/datadeletion.sh
 
 log "LaunchAgent and Script install complete"
-log "boostrapping the launchagent"
 
-	launchctl bootout gui/"$userID" /Library/LaunchAgents/edu.ithaca.datadeletion.plist
-	launchctl bootstrap gui/"$userID" /Library/LaunchAgents/edu.ithaca.datadeletion.plist
+if [[ "$loggedInUser" != "" ]]; then
+    log "boostrapping the launchagent"
+    launchctl bootout gui/"$userID" /Library/LaunchAgents/edu.ithaca.datadeletion.plist
+    launchctl bootstrap gui/"$userID" /Library/LaunchAgents/edu.ithaca.datadeletion.plist
+fi
 
 exit $?
 

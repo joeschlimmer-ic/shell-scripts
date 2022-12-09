@@ -26,5 +26,6 @@ if [ "$buttonClicked" == 0 ]; then
 elif [ "$buttonClicked" == 2 ]; then
 	# Buttion 2 was Clicked
         # echo "$(date)::: I dont want to right now" >> /var/tmp/tech_renewal.log
+        echo "Closing info panel"
 fi
 exit $?
